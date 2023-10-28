@@ -1,1 +1,1 @@
-https://joshlefou.github.io/Forum-YNOV/
+Ceci est un projet de B1 pour mon école
