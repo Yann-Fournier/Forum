@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ================= REMIX ICONS ================= -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- ================= CSS ================= -->
+    <link rel="stylesheet" href="../assets/css/newpost.css">
+
+    <title>Welcome to you</title>
+</head>
+<body>
+    <header>
+        <h1 class="logo">FORUM</h2>
+        <nav class="navbar">
+            <div class="buttons-navbar">
+                <img src="https://avatars.githubusercontent.com/u/{{.ConnectUserImg}}?s=400&v=4" alt="photo" style="width: 40px; height: 40px; border-radius: 10%;margin-left: 20px; margin-top: 5px;">
+                <form action="/logout" method="post">
+                    <button name="Deconnexion" value="Deconnexion">Deconnexion</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="global__container">
+        <div class="header-post__container">
+            <p>Nouveau topic</p>
+            <button class="new__subject">
+                <i class="ri-arrow-left-line"></i>
+                <a href="/">Retourner aux topics</a>
+            </button>
+        </div>
+
+        <div class="subject__content">
+            <form action="/newpostTransi">
+                <p>Titre</p>
+                <input type="text" required name="topic-name" id="topic" placeholder="Titre du topic">
+                <p>Catégorie</p>
+                <select name="category" required id="category">
+                    <option value="film">film</option>
+                    <option value="serie">serie</option>
+                </select>
+                <p>Description</p>
+                <textarea name="content" required id="content" cols="30" rows="10" placeholder="Écrivez votre sujet içi"></textarea>
+
+                <div class="subject__buttons">
+                    <!-- <button name="buCreerPost" value="annuler">Annuler</button> -->
+                    <button name="buCreerPost" value="creer">Créer le topic</button>
+                </div>
+            </form>
+        </div>
+    </main>
+        <!-- ================= SCRIPTS ================= -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        <script src="../assets/js/main.js"></script>
+</body>
+</html>

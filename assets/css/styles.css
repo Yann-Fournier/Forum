@@ -1,0 +1,521 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vh;
+    background: url(/assets/images/5.jpg);
+    /* background-color: #162938; */
+    background-size: cover;
+    background-position: center;
+}
+
+/* ============= HEADER & NAVBAR ============= */
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    z-index: 99;
+    backdrop-filter: blur(20px);
+    /* overflow: hidden; */
+}
+
+.logo{
+    font-size: 2rem;
+    color: white;
+    user-select: none;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.navbar .nav__links{
+    position: relative;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    padding-top: 10px;
+    font-weight: 500;
+    margin-left: 10px;
+    border-style: none;
+    width: 100px;
+}
+
+/* =========== TRAITS SOUS NAVBAR =========== */
+.navbar .nav__links::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navbar .nav__links:hover::after{
+    transform: scaleX(1);
+    cursor: pointer;
+}
+
+/* =========== BOUTTONS NAVBAR =========== */
+
+.navbar .filter{
+    font-size: 1.3rem;
+    margin-left: 40px;
+    color: #fff;
+    display: inline-block;
+}
+.ri-filter-line{
+    width: max-content;
+}
+.navbar .filter::after{
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+.navbar .filter:hover::after{
+    transform: scaleX(1);
+}
+.navbar .filter:hover{
+    cursor: pointer;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    top: 30px;
+    left: -50px;
+    position: absolute;
+    background-color: none;
+    min-width: 160px;
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content .formu .BuMenuDeroulant{
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    backdrop-filter: blur(10px);
+    font-size: 1rem;
+    border-style: none;
+    border-radius: 0px;
+    margin: 0px;
+    /* backdrop-filter: blur(100px); */
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: rgba(241, 241, 241, 0.6);
+    /* backdrop-filter: blur(100px); */
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.navbar button{
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    padding: .2rem .5rem;
+    transition: .5s;
+}
+nav button:hover{
+    background: rgba(255, 255, 255, .5);
+    color: #162938;
+}
+
+.buttons-navbar{
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* =============== CONNEXION FORM =============== */
+.wrapper{
+    position: absolute;
+    top: 100px;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(255, 255, 255, .5);
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .3s ease, height .3s ease;
+    z-index: 1;
+}
+
+.wrapper.login-popup{
+    transform: scale(1);
+}
+/* .wrapper.register-popup{
+    transform: scale(1);
+    position: absolute;
+    transform: translateX(-400px);
+    transition: transform .3s ease;
+} */
+.wrapper.register-popup.active{
+    transform: scale(1);
+}
+.wrapper.active{
+    height: 520px;
+}
+
+.wrapper .form-box{
+    width: 100%;
+    padding: 40px;
+}
+
+.wrapper .form-box.login{
+    transition: transform .3s ease;
+    transform: translateX(0);
+}
+.wrapper.active .form-box.login{
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.register{
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+.wrapper.active .form-box.register{
+    transition: transform .3s ease;
+    transform: translateX(0);
+}
+
+.wrapper .ri-close-line{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, .5);
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2{
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 57px;
+}
+
+.form-box-button{
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.login-register{
+    font-size: .9rem;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-register p a{
+    text-decoration: underline;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+
+/* ============= MAIN PAGE ============= */
+
+/* ============= TOP POST WINDOW ============= */
+.testounet{
+    display: inline-block;
+    margin-top: 120px;
+}
+
+.global__container{
+    width: 800px;
+    height: auto;
+    background: transparent;
+    backdrop-filter: blur(30px);
+    border-radius: 15px;
+    overflow: hidden;
+    padding-bottom: 1rem;
+}
+.global__container p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+.global__container .header-post__container{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid rgba(100, 100, 200, 1);
+    background: rgba(255, 255, 255, .7);
+}
+
+.global__container .header-post__container p{
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0 .5rem;
+    margin-left: 1rem;
+    color: rgba(40, 40, 40, 1);
+}
+
+.global__container .header-post__container .fo .new__subject{
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1rem;
+    padding: 0.2rem 0.5rem;
+    color: #fff;
+    background-color: #162938;
+    border-radius: 5px;
+    border: none;
+    transition: .5s;
+    margin-top: 8px;
+}
+
+.global__container .header-post__container .fo .new__subject:hover{
+    background-color: rgba(22, 41, 56, .9);
+}
+
+/* ============= LOW POST LIST ============= */
+
+/* .post__list{
+    box-shadow: 0 0 5px white;
+} */
+
+/* ============= INDIVIDUAL POSTS ============= */
+
+.post__subject{
+    margin-left: .5rem;
+    margin-right: .5rem;
+    padding-left: 1rem;
+    margin-top: .3rem;
+    border-bottom: 3px solid rgba(255, 255, 255, .3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__subject .subject_title{
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+}
+.post__subject .subject_title span{
+    color: rgba(255, 0, 25, 1);
+}
+
+.post__list .post__subject .subject__description{
+    color: rgba(180, 180, 180, 1);
+    font-size: .8rem;
+    margin-bottom: .5rem;
+}
+.post__list .post__subject .subject__description span{
+    color: #fff;
+}
+
+.right__subject form{
+    display: flex;
+    gap: 1rem;
+    width: 60px;
+    flex-direction: row;
+}
+.right__subject form button{
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.right__subject form button:hover{
+    cursor: pointer;
+}
+
+.notifConnected{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -500px;
+    top: 175px;
+    width: 200px;
+    height: 50px;
+    background: rgba(255, 0, 0, 0.38);
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+    margin-left: 10px;
+    padding: .2rem .5rem;
+}
+.notifBubble {
+    position: absolute; top: 200px; left:1885px;
+    margin-top: 0;
+    height: 1px;
+    width: 1px;
+    background: rgb(255, 255, 255);
+    /* padding: 40px; */
+    border-radius: 50%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0);
+}
+/* height: 70px; */
+
+.notifBubbleWave {
+    position: absolute; top: 200px; left:1885px;
+    margin-top: 0;
+    height: 1px;
+    width: 1px;
+    background: rgb(255, 255, 255);
+    /* padding: 40px; */
+    border-radius: 50%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0);
+}
+
+.img1 {
+    position: absolute;
+    top: -20%;
+    width: 20px;
+    height: 20px;
+    /* scale:100%; */
+}
+
+.img2 {
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    /* scale:100%; */
+}
+
+.img3 {
+    width: 20px;
+    height: 20px;
+    scale:100%;
+}
+
+.img4 {
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    scale:100%;
+}

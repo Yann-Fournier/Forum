@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ================= REMIX ICONS ================= -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- ================= CSS ================= -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <title>Projet Forum Ynov</title>
+
+</head>
+<body>
+    <header>
+        <h1 class="logo">FORUM</h2>
+        <nav class="navbar">
+            <form class="f" action="/ho" method="post">
+                <button class="nav__links" name="link" value="home">Home</button>
+                <button class="nav__links" name="link" value="films">Films</button>
+                <button class="nav__links" name="link" value="series">Séries</button>
+            </form>
+            <div class="filter dropdown" style="margin-top: 15px;">
+                <i class="ri-filter-line"></i>
+                <i class="ri-arrow-drop-down-fill"></i>
+                <div class="dropdown-content">
+                    <form class="formu" action="/ho">
+                        <button class="BuMenuDeroulant" name="BuMenuDeroulant" value="Plikes">Les plus likés</button>
+                        <button class="BuMenuDeroulant" name="BuMenuDeroulant" value="Pdislikes">Les plus dislikés</button>
+                        <button class="BuMenuDeroulant" name="BuMenuDeroulant" value="Mlikes">Les moins likés</button>
+                        <button class="BuMenuDeroulant" name="BuMenuDeroulant" value="Mdislikes">Les moins dislikés</button>
+                    </form>
+                </div>          
+            </div>
+                {{if .IsConnecter}}
+                    <div class="buttons-navbar">
+                        <img src="https://avatars.githubusercontent.com/u/{{.ConnectUserImg}}?s=400&v=4" alt="photo" style="width: 40px; height: 40px; border-radius: 10%;margin-left: 20px; margin-top: 5px;">
+                        <form action="/logout" method="post">
+                            <button name="Deconnexion" value="Deconnexion">Deconnexion</button>
+                        </form>
+                    </div>
+                {{else}}
+                    <div class="buttons-navbar">
+                        <button class="button__login-popup">Se connecter / S'inscrire</button>
+                    </div>
+                {{end}}
+            </nav>
+    </header>
+    {{if .IsConnecter}}
+        <p class="notifBubble"> </p>
+        <p class="notifBubbleWave"> </p>
+        <a class="notifConnected">Vous êtes connecté !</a>
+    {{else}}
+        <p class="notifBubble"> </p>
+        <p class="notifBubbleWave"> </p>
+        <a class="notifConnected">Vous n'êtes pas connecté !</a>
+    {{end}}
+
+    <div class="wrapper">
+        <i class="ri-close-line"></i>
+        <div class="form-box login">
+            <h2>Connectez-vous</h2>
+            <form action="/login">
+                <div class="input-box">
+                    <i class="ri-mail-line icon"></i>
+                    <input type="email" required name="ConnectionEmail" value="">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <i class="ri-lock-line icon"></i>
+                    <input type="password" required name="ConnectionMdp" value="">
+                    <label>Mot de passe</label>
+                </div>
+                <button type="submit" class="form-box-button">Login</button>
+
+                <div class="login-register">
+                    <p>Vous n'avez pas de compte ?<br>
+                    <a href="#" class="register-link">Inscrivez-vous içi</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Inscrivez-vous</h2>
+            <form action="/login">
+                <div class="input-box">
+                    <i class="ri-user-fill icon"></i>
+                    <input type="text" required name="InscriptionName" value="">
+                    <label>Nom d'utilisateur</label>
+                </div>
+                <div class="input-box">
+                    <i class="ri-mail-line icon"></i>
+                    <input type="email" required name="InscriptionEmail" value="">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <i class="ri-lock-line icon"></i>
+                    <input type="password" required name="InscriptionMdp" value="">
+                    <label>Mot de passe</label>
+                </div>
+                <button type="submit" class="form-box-button">Inscription</button>
+
+                <div class="login-register">
+                    <p>Vous avez un compte ?<br>
+                    <a href="#" class="login-link">Connectez-vous içi</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="testounet">
+        {{if .IsConnecter}}
+        {{else}}
+            <p style="color: rgb(255, 0, 0); font-size: 1.2rem;">Veuillez vous connecter pour profiter des fonctionnalités du forum.</p>
+        {{end}}
+
+        {{if eq .Error 1}}
+            <p style="color: rgb(255, 0, 0); font-size: 1.2rem;">Votre session est déjà ouverte. Vous ne pouvez pas en ouvrir une autre.</p>
+        {{else if eq .Error 2}}
+            <p style="color: rgb(255, 0, 0); font-size: 1.2rem;">Impossible de ce connceter. Veuillez entrer à nouveau vos identifiants.</p>
+        {{else if eq .Error 3}}
+            <p style="color: rgb(255, 0, 0); font-size: 1.2rem;">Impossible de creer votre compte. Cette addresse mail est déjà pirse.</p>
+        {{else if eq .Error 4}}
+            <p style="color: rgb(255, 0, 0); font-size: 1.2rem;">Votre session à expirer !</p>
+        {{end}}
+    </div>
+
+    <main class="global__container">
+        <div class="header-post__container">
+            <p style="margin-top: 5px;">Posts</p>
+            {{if .IsConnecter}}
+            <form class="fo" action="/newpost">
+                <button class="new__subject">
+                    <i class="ri-add-line"></i>
+                    Créer un nouveau post
+                </button>
+            </form>
+            {{else}}
+            <form class="fo" action="/newpost">
+                <button class="new__subject" disabled="disabled">
+                    <i class="ri-add-line"></i>
+                    Créer un nouveau post
+                </button>
+            </form>
+            {{end}}
+        </div>
+
+        <div class="post__list">
+            {{if .IsConnecter}}
+                {{range .Posts}}
+                    <div class="post__subject" id="post-{{.Id}}">
+                        <div class="left__subject">
+                            <div class="subject_title">
+                                <form action="/post" method="post">
+                                    <button style="color: rgb(128, 0, 128);border-style: none; background-color: rgba(255, 0, 25, 0); text-decoration: underline; font-size: 17px; margin-right: 10px;" name="buPost" value="{{.Id}}">
+                                        {{.Titre}}
+                                    </button>
+                                </form>
+                                <span>#{{.Tag}}</span>
+                            </div>
+                            <p style="color: #fff;margin: 5px;">{{.Description}}</p>
+                            <p class="subject__description">
+                                Par <span>{{.UserName}}</span> le <span>{{.Date}}</span>
+                            </p>
+                        </div>
+                        <div class="right__subject">
+                            <form action="/ho">
+                                <button class="bulike/dislike" name="bulike/dislike" value="{{.Id}},like">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 8.99997H5V21H2C1.44772 21 1 20.5523 1 20V9.99997C1 9.44769 1.44772 8.99997 2 8.99997ZM7.29289 7.70708L13.6934 1.30661C13.8693 1.13066 14.1479 1.11087 14.3469 1.26016L15.1995 1.8996C15.6842 2.26312 15.9026 2.88253 15.7531 3.46966L14.5998 7.99997H21C22.1046 7.99997 23 8.8954 23 9.99997V12.1043C23 12.3656 22.9488 12.6243 22.8494 12.8658L19.755 20.3807C19.6007 20.7554 19.2355 21 18.8303 21H8C7.44772 21 7 20.5523 7 20V8.41419C7 8.14897 7.10536 7.89462 7.29289 7.70708Z" fill="rgba(0,255,13,1)"></path></svg>
+                                    <!-- <img src="../assets/images/fingerUpOff.png" class= "img1">
+                                    <img src="../assets/images/fingerUpOn.png" class= "img2"> -->
+                                    <span style="color:#fff">{{.NbrLikes}}</span>
+                                </button>
+                                <button class="bulike/dislike" name="bulike/dislike" value="{{.Id}},dislike">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 15H19V3H22C22.5523 3 23 3.44772 23 4V14C23 14.5523 22.5523 15 22 15ZM16.7071 16.2929L10.3066 22.6934C10.1307 22.8693 9.85214 22.8891 9.65308 22.7398L8.8005 22.1004C8.3158 21.7369 8.09739 21.1174 8.24686 20.5303L9.40017 16H3C1.89543 16 1 15.1046 1 14V11.8957C1 11.6344 1.05118 11.3757 1.15064 11.1342L4.24501 3.61925C4.3993 3.24455 4.76447 3 5.16969 3H16C16.5523 3 17 3.44772 17 4V15.5858C17 15.851 16.8946 16.1054 16.7071 16.2929Z" fill="rgba(255,6,6,1)"></path></svg>
+                                    <!-- <img src="../assets/images/fingerUpOff.png" class= "img1">
+                                    <img src="../assets/images/fingerUpOn.png" class= "img2"> -->
+                                    <span style="color:#fff">{{.NbrDislikes}}</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{end}}
+            {{else}}
+                {{range .Posts}}
+                    <div class="post__subject" id="post-{{.Id}}">
+                        <div class="left__subject">
+                            <div class="subject_title">
+                                    <button formaction="/post" style="color: rgb(128, 0, 128);border-style: none; background-color: rgba(255, 0, 25, 0); text-decoration: underline; font-size: 17px; margin-right: 10px;" name="buPost" value="{{.Id}}">
+                                        {{.Titre}}
+                                    </button>
+                                <span>#{{.Tag}}</span>
+                            </div>
+                            <p style="color: #fff;margin: 5px;;">{{.Description}}</p>
+                            <p class="subject__description">
+                                Par <span>{{.UserName}}</span> le <span>{{.Date}}</span>
+                            </p>
+                        </div>
+                        <div class="right__subject">
+                            <form action="/">
+                                <button name="bulike/dislike" value="{{.Id}},like" disabled="disabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 8.99997H5V21H2C1.44772 21 1 20.5523 1 20V9.99997C1 9.44769 1.44772 8.99997 2 8.99997ZM7.29289 7.70708L13.6934 1.30661C13.8693 1.13066 14.1479 1.11087 14.3469 1.26016L15.1995 1.8996C15.6842 2.26312 15.9026 2.88253 15.7531 3.46966L14.5998 7.99997H21C22.1046 7.99997 23 8.8954 23 9.99997V12.1043C23 12.3656 22.9488 12.6243 22.8494 12.8658L19.755 20.3807C19.6007 20.7554 19.2355 21 18.8303 21H8C7.44772 21 7 20.5523 7 20V8.41419C7 8.14897 7.10536 7.89462 7.29289 7.70708Z" fill="rgba(0,255,13,1)"></path></svg>
+                                    <!-- <img src="../assets/images/fingerUpOff.png" class= "img1">
+                                    <img src="../assets/images/fingerUpOn.png" class= "img2"> -->
+                                    <span style="color:#fff">{{.NbrLikes}}</span>
+                                </button>
+                                <button name="bulike/dislike" value="{{.Id}},dislike" disabled="disabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 15H19V3H22C22.5523 3 23 3.44772 23 4V14C23 14.5523 22.5523 15 22 15ZM16.7071 16.2929L10.3066 22.6934C10.1307 22.8693 9.85214 22.8891 9.65308 22.7398L8.8005 22.1004C8.3158 21.7369 8.09739 21.1174 8.24686 20.5303L9.40017 16H3C1.89543 16 1 15.1046 1 14V11.8957C1 11.6344 1.05118 11.3757 1.15064 11.1342L4.24501 3.61925C4.3993 3.24455 4.76447 3 5.16969 3H16C16.5523 3 17 3.44772 17 4V15.5858C17 15.851 16.8946 16.1054 16.7071 16.2929Z" fill="rgba(255,6,6,1)"></path></svg>
+                                    <!-- <img src="../assets/images/fingerDownOff.png" class= "img3">
+                                    <img src="../assets/images/fingerDownOn.png" class= "img4"> -->
+                                    <span style="color:#fff">{{.NbrDislikes}}</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{end}}
+            {{end}}
+        </div>
+    </main>
+
+    <p style="font-size: 25px; color: rgba(255, 0, 25, 0);">Text pour faire beau en bas de la page ....</p>
+    
+</body>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</html>
